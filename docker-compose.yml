@@ -15,7 +15,7 @@ services:
 
   web:
     build: .
-    command: poetry run python manage.py runserver 0.0.0.0:8000
+    command: poetry run python src/manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/app
     ports:
@@ -28,6 +28,7 @@ services:
       DB_PASSWORD: hotel_pass
       DB_HOST: db
       DB_PORT: 5432
+      PYTHONPATH: /app/src
 
 volumes:
   postgres_data:

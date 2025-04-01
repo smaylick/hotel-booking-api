@@ -24,3 +24,15 @@ pytest-django = "^4.10.0"
 ruff = "^0.11.2"
 pre-commit = "^4.2.0"
 
+[tool.ruff]
+line-length = 91
+target-version = "py311"
+exclude = ["*/migrations/*", "venv", ".venv", "build", "dist"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]  # E и F — ошибки pep8 и pyflakes, I — isort (импорты)
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "lf"
