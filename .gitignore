@@ -1,0 +1,49 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual envs (по идее poetry не создаёт локальный .venv, но на всякий)
+.venv/
+
+# Django stuff
+*.log
+*.pot
+*.pyc
+*.sqlite3
+db.sqlite3
+
+# Env files
+.env
+!.env.example
+
+# VSCode / PyCharm
+.vscode/
+.idea/
+
+# MacOS
+.DS_Store
+
+# Docker
+*.pid
+*.db
+*.sock
+
+# Python cache
+.mypy_cache/
+.pytest_cache/
+
+# Coverage
+htmlcov/
+.coverage
+.tox/
+
+# Poetry
+poetry.lock
+
+# Ignore compiled migrations (если вдруг)
+**/migrations/__pycache__/
+
+# Ignore media / static collected in prod
+staticfiles/
+media/

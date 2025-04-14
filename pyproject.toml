@@ -3,16 +3,17 @@ name = "hotel-booking-project"
 version = "0.1.0"
 description = ""
 authors = [
-    {name = "sgavrilenko",email = "sgavrilenko@marfa-tech.com"}
+    {name = "sgavrilenko", email = "sgavrilenko@marfa-tech.com"}
 ]
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "psycopg2-binary (>=2.9.10,<3.0.0)",
     "django (>=5.1.7,<6.0.0)",
-    "djangorestframework (>=3.16.0,<4.0.0)"
+    "djangorestframework (>=3.16.0,<4.0.0)",
+    "python-decouple (>=3.8,<4.0)",
+    "drf-spectacular (>=0.28.0,<0.29.0)"
 ]
-
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
@@ -23,16 +24,39 @@ pytest = "^8.3.5"
 pytest-django = "^4.10.0"
 ruff = "^0.11.2"
 pre-commit = "^4.2.0"
+pytest-sugar = "^1.0.0"
+pytest-dotenv = "^0.5.2"
+black = "^25.1.0"
+isort = "^6.0.1"
 
 [tool.ruff]
-line-length = 91
+line-length = 96
 target-version = "py311"
 exclude = ["*/migrations/*", "venv", ".venv", "build", "dist"]
 
 [tool.ruff.lint]
-select = ["E", "F", "I"]  # E и F — ошибки pep8 и pyflakes, I — isort (импорты)
+select = ["E", "F", "I"]
 
 [tool.ruff.format]
 quote-style = "double"
 indent-style = "space"
 line-ending = "lf"
+
+[tool.black]
+line-length = 96
+target-version = ["py311"]
+
+[tool.isort]
+profile = "black"
+line_length = 96
+skip = ["migrations", "venv", ".venv"]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "config.settings"
+testpaths = ["tests"]
+pythonpath = ["src"]
+python_files = ["tests.py", "test_*.py", "*_tests.py"]
+addopts = "-v --color=yes"
+filterwarnings = [
+  "ignore::RuntimeWarning"
+]
