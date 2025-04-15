@@ -1,3 +1,4 @@
+from drf_spectacular.utils import OpenApiParameter, extend_schema
 from rest_framework import filters, generics, status
 from rest_framework.response import Response
 
@@ -64,6 +65,16 @@ class BookingDestroyAPIView(generics.DestroyAPIView):
         )
 
 
+@extend_schema(
+    parameters=[
+        OpenApiParameter(
+            name="room_id",
+            required=False,
+            type=int,
+            description="ID номера, для которого нужно получить бронирования",
+        ),
+    ]
+)
 class BookingListAPIView(generics.ListAPIView):
     serializer_class = serializers.BookingSerializer
 
@@ -71,4 +82,4 @@ class BookingListAPIView(generics.ListAPIView):
         room_id = self.request.query_params.get("room_id")
         if room_id is not None:
             return Booking.objects.filter(room_id=room_id)
-        return Booking.objects.none()
+        return Booking.objects.all()
