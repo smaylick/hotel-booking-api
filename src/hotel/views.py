@@ -6,11 +6,13 @@ from . import serializers
 from .models import Booking, Hotel, Room
 
 
+@extend_schema(tags=["Отели"])
 class HotelListCreateAPIView(generics.ListCreateAPIView):
     queryset = Hotel.objects.all()
     serializer_class = serializers.HotelSerializer
 
 
+@extend_schema(tags=["Номера"])
 class RoomListCreateAPIView(generics.ListCreateAPIView):
     queryset = Room.objects.all()
     serializer_class = serializers.RoomSerializer
@@ -27,6 +29,7 @@ class RoomListCreateAPIView(generics.ListCreateAPIView):
         )
 
 
+@extend_schema(tags=["Номера"])
 class RoomDestroyAPIView(generics.DestroyAPIView):
     queryset = Room.objects.all()
     serializer_class = serializers.RoomSerializer
@@ -41,6 +44,7 @@ class RoomDestroyAPIView(generics.DestroyAPIView):
         )
 
 
+@extend_schema(tags=["Бронирования"])
 class BookingCreateAPIView(generics.CreateAPIView):
     queryset = Booking.objects.all()
     serializer_class = serializers.BookingSerializer
@@ -51,6 +55,7 @@ class BookingCreateAPIView(generics.CreateAPIView):
         return Response({"booking_id": booking_id}, status=status.HTTP_201_CREATED)
 
 
+@extend_schema(tags=["Бронирования"])
 class BookingDestroyAPIView(generics.DestroyAPIView):
     queryset = Booking.objects.all()
     serializer_class = serializers.BookingSerializer
@@ -66,6 +71,7 @@ class BookingDestroyAPIView(generics.DestroyAPIView):
 
 
 @extend_schema(
+    tags=["Бронирования"],
     parameters=[
         OpenApiParameter(
             name="room_id",
@@ -73,7 +79,7 @@ class BookingDestroyAPIView(generics.DestroyAPIView):
             type=int,
             description="ID номера, для которого нужно получить бронирования",
         ),
-    ]
+    ],
 )
 class BookingListAPIView(generics.ListAPIView):
     serializer_class = serializers.BookingSerializer
