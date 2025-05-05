@@ -23,11 +23,6 @@ services:
     depends_on:
       - db
     environment:
-      DB_NAME: hotel_db
-      DB_USER: hotel_user
-      DB_PASSWORD: hotel_pass
-      DB_HOST: db
-      DB_PORT: 5432
       PYTHONPATH: /app/src
 
 volumes:
