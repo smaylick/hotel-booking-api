@@ -2,6 +2,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
+*.pyc
 
 # Virtual envs (по идее poetry не создаёт локальный .venv, но на всякий)
 .venv/
