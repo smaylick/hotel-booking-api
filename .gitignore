@@ -17,6 +17,7 @@ db.sqlite3
 # Env files
 .env
 !.env.example
+.env.docker
 
 # VSCode / PyCharm
 .vscode/

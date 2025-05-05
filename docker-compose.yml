@@ -4,10 +4,12 @@ services:
   db:
     image: postgres:15
     restart: always
+    env_file:
+      - .env.docker
     environment:
-      POSTGRES_DB: hotel_db
-      POSTGRES_USER: hotel_user
-      POSTGRES_PASSWORD: hotel_pass
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     ports:
       - "5432:5432"
     volumes:
@@ -22,6 +24,8 @@ services:
       - "8000:8000"
     depends_on:
       - db
+    env_file:
+      - .env.docker
     environment:
       PYTHONPATH: /app/src
 

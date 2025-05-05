@@ -1,6 +1,7 @@
 import pytest
 from django.test import Client
 from django.urls import reverse
+from rest_framework import status
 
 
 @pytest.fixture
@@ -14,7 +15,7 @@ def hotel(client):
         url = reverse("hotel-list-create")
         payload = {"name": name, "address": address}
         response = client.post(url, data=payload, content_type="application/json")
-        assert response.status_code == 201
+        assert response.status_code == status.HTTP_201_CREATED
         return response.data["id"]
 
     return _create_hotel
@@ -27,7 +28,7 @@ def room_factory(client, hotel):
         url = reverse("room-list-create")
         payload = {"hotel": hotel_id, "description": description, "price": price}
         response = client.post(url, data=payload, content_type="application/json")
-        assert response.status_code == 201
+        assert response.status_code == status.HTTP_201_CREATED
         return response.json()
 
     return _create_room

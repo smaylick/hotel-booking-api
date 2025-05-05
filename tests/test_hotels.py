@@ -1,5 +1,6 @@
 import pytest
 from django.urls import reverse
+from rest_framework import status
 
 
 @pytest.mark.django_db
@@ -9,7 +10,7 @@ def test_create_hotel(client):
 
     response = client.post(url, data=payload, content_type="application/json")
 
-    assert response.status_code == 201
+    assert response.status_code == status.HTTP_201_CREATED
     assert "id" in response.data
     assert response.data["name"] == "Test Hotel"
 
@@ -23,7 +24,7 @@ def test_list_hotels(client, hotel):
     url = reverse("hotel-list-create")
     response = client.get(url)
 
-    assert response.status_code == 200
+    assert response.status_code == status.HTTP_200_OK
     assert len(response.data) == 3
     names = [h["name"] for h in response.data]
     assert "Hotel A" in names

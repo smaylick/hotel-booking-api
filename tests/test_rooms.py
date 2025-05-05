@@ -1,5 +1,6 @@
 import pytest
 from django.urls import reverse
+from rest_framework import status
 
 
 @pytest.mark.django_db
@@ -24,7 +25,7 @@ def test_list_rooms(client, hotel, room_factory):
     response = client.get(url)
     rooms = response.json()
 
-    assert response.status_code == 200
+    assert response.status_code == status.HTTP_200_OK
     assert len(rooms) == 3
 
     sorted_response = client.get(f"{url}?ordering=price")
@@ -41,8 +42,8 @@ def test_delete_room(client, room_factory):
     response = client.delete(url)
     data = response.json()
 
-    assert response.status_code == 200
+    assert response.status_code == status.HTTP_200_OK
     assert data["message"] == f"Room with ID {room_id} has been deleted."
 
     second_response = client.delete(url)
-    assert second_response.status_code == 404
+    assert second_response.status_code == status.HTTP_404_NOT_FOUND
